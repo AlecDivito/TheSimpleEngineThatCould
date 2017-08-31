@@ -1,6 +1,5 @@
-#version 150 core
-
-in vec2 pos;
+#version 330 core
+layout (location = 0) in vec2 pos;
 
 void main()
 {
