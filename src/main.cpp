@@ -6,6 +6,7 @@
 #include "util/Shader.h"
 #include "util/ShaderProgram.h"
 #include "model/Rectangle.h"
+#include "util/Texture.h"
 
 void cursor_pos_callback(GLFWwindow * window, double xpos, double ypos)
 {
@@ -51,6 +52,8 @@ int main(int argc, char const *argv[])
 	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
 	Rectangle rect;
+	Texture t;
+	t.Generate(2, 2);
 
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 
@@ -69,6 +72,7 @@ int main(int argc, char const *argv[])
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		program.Use();
+		t.Bind();
 		rect.Draw();
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);
