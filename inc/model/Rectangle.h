@@ -16,6 +16,7 @@ class Rectangle
 {
     public:
        // variables
+       GLuint EBO;
        GLuint VBO;
        GLuint VAO;
 
@@ -26,9 +27,14 @@ class Rectangle
        void Draw();
     protected:
     private:
-        const float vertices[6] = {
-	         0.0f,  0.5f,
+        const GLfloat vertices[8] = {
+           0.5f,  0.5f,
+	        -0.5f,  0.5f,
 	         0.5f, -0.5f,
 	        -0.5f, -0.5f
+        };
+
+        const GLint indices[6] = {
+          0,1,2,1,2,3
         };
 };
