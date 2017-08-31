@@ -1,6 +1,11 @@
 #include <iostream>
 
+#include <GL/glew.h>
+
 #include "util/Window.h"
+#include "util/Shader.h"
+#include "util/ShaderProgram.h"
+#include "model/Rectangle.h"
 
 void cursor_pos_callback(GLFWwindow * window, double xpos, double ypos)
 {
@@ -42,6 +47,11 @@ int main(int argc, char const *argv[])
 {
 	Window window(640, 480);
 
+	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
+	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
+	ShaderProgram program(vertex, fragment);
+	Rectangle rect;
+
 	glfwSetKeyCallback(window.context, key_callback);
 	glfwSetCursorPosCallback(window.context, cursor_pos_callback);
 	glfwSetCursorEnterCallback(window.context, cursor_enter_callback);
@@ -56,6 +66,8 @@ int main(int argc, char const *argv[])
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		program.Use();
+		rect.Draw();
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);
 		/* Poll for and process events */
