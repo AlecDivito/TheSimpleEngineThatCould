@@ -15,12 +15,12 @@ ShaderProgram::ShaderProgram(Shader vertex, Shader fragment)
 {
 	program = glCreateProgram();
 
-	glAttachShader(program, vertex.shader);
-	glAttachShader(program, fragment.shader);
+	glAttachShader(program, vertex.Id);
+	glAttachShader(program, fragment.Id);
 	glLinkProgram(program);
 
     GLint status;
-    glGetShaderiv(program, GL_COMPILE_STATUS, &status);
+    glGetProgramiv(program, GL_LINK_STATUS, &status);
 
     if (status != GL_TRUE) {
         char buffer[512];

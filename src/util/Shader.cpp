@@ -9,50 +9,63 @@
  *****************************************************************************/
 
 #include "util/Shader.h"
+#include <stdio.h>
+#include <sstream>
 #include <fstream>
 #include <iostream>
 
-Shader::Shader(std::string path, GLenum shaderType)
+Shader::Shader(const char * path, GLenum shaderType)
 {
-	source = getFileSource(path);
-	shader = glCreateShader(shaderType);
-	glShaderSource(shader, 1, &source, NULL);
-	glCompileShader(shader);
-
-	GLint status;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-
-	if (status != GL_TRUE) {
-		char buffer[512];
-		glGetShaderInfoLog(shader, 512, NULL, buffer);
-        std::cout << "| ERROR::SHADER: Compile-time error: Type: " << shaderType << "\n"
-            << buffer << "\n -- --------------------------------------------------- -- "
-            << std::endl;
-    }
+    Path = path;
+    Type = shaderType;
+    CreateShader(path);
 }
 
 
 Shader::~Shader()
 {
-    glDeleteShader(shader);
-    delete[] source;
+    glDeleteShader(Id);
 }
 
-const char * Shader::getFileSource(std::string path)
+void Shader::CreateShader(const char * path)
 {
-	std::ifstream file;
+    std::string fileSource;
 
-	file.open(path);
-	if (!file) {
-		std::cout << "Unable to open file: " << path << std::endl;
-	}
+    try
+    {
+        std::ifstream file(path);
+        std::stringstream stream;
 
-	std::string output;
-	std::string line;
-	while (!file.eof()) {
-		getline(file, line);
-		output.append(line + "\n");
-	}
-	file.close();
-	return output.c_str();
+        stream << file.rdbuf();
+
+        file.close();
+
+        fileSource = stream.str();
+    }
+    catch(std::exception e)
+    {
+        std::cout << "ERROR::SHADER: Failed to read Id files" << std::endl;
+    }
+
+    const GLchar * temp = fileSource.c_str();
+    Compile(temp);
+}
+
+void Shader::Compile(const GLchar * source)
+{
+    Id = glCreateShader(Type);
+    glShaderSource(Id, 1, &source, NULL);
+    glCompileShader(Id);
+
+    GLint status;
+    glGetShaderiv(Id, GL_COMPILE_STATUS, &status);
+
+    if (status != GL_TRUE) {
+        char buffer[512];
+        glGetShaderInfoLog(Id, 512, NULL, buffer);
+        std::cout << "| ERROR::SHADER: Compile-time error: Type: " << Type << "\n"
+            << buffer << "\n -- --------------------------------------------------- -- "
+            << std::endl;
+    }
+
 }

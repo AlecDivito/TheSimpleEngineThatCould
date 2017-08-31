@@ -10,17 +10,18 @@
  *
  *****************************************************************************/
 
-#include <string>
 #include <GL/glew.h>
 
 class Shader
 {
     public:
-       GLuint shader;
-       Shader(std::string, GLenum);
+       GLuint Id;
+       GLenum Type;
+       const char * Path;
+       Shader(const char *, GLenum);
        virtual ~Shader();
     protected:
     private:
-       const GLchar * source;
-       const char * getFileSource(std::string);
+       void CreateShader(const char *);
+       void Compile(const GLchar * source);
 };
