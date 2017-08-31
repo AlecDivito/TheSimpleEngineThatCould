@@ -11,7 +11,6 @@
  *****************************************************************************/
 
 #include <GL/glew.h>
-#include "util/ShaderProgram.h"
 
 class Rectangle
 {
@@ -20,7 +19,7 @@ class Rectangle
        GLuint VBO;
        GLuint VAO;
 
-       Rectangle(ShaderProgram);
+       Rectangle();
        virtual ~Rectangle();
 
        void Bind();

@@ -10,7 +10,7 @@
 
 #include "model/Rectangle.h"
 
-Rectangle::Rectangle(ShaderProgram program)
+Rectangle::Rectangle()
 {
     // create the buffer on the graphics card
 	glGenBuffers(1, &VBO);
@@ -44,5 +44,6 @@ void Rectangle::Bind()
 
 void Rectangle::Draw()
 {
+    Bind();
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
