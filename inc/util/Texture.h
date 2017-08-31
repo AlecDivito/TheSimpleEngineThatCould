@@ -10,11 +10,20 @@
  *
  *****************************************************************************/
 
+#include <GL/glew.h>
+
 class Texture
 {
     public:
-       Texture();
-       virtual ~Texture();
+        GLuint Id;
+        int Width;
+        int Height;
+        const char * Path;
+
+        Texture();
+        virtual ~Texture();
+        void Generate(GLuint,GLuint);
+        void Bind();
     protected:
     private:
 };

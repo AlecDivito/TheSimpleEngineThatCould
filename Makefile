@@ -13,7 +13,7 @@ SRCEXT = cpp
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS = -Wall -std=c++11 -fexceptions -g
-LIB= lib/glfw-3.2.1/src/libglfw3.a -lGLEW -lm -lGLU -lGL -ldl -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lXinerama -lXcursor
+LIB= lib/glfw-3.2.1/src/libglfw3.a -lGLEW -lSOIL -lm -lGLU -lGL -ldl -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lXinerama -lXcursor
 INC= -I lib/glfw-3.2.1/include/ -L /usr/local/lib/  -I $(INCDIR)
 # *****************************************************************************
 # Targets needed to bring executable up to date
