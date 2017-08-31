@@ -27,11 +27,12 @@ class Rectangle
        void Draw();
     protected:
     private:
-        const GLfloat vertices[8] = {
-           0.5f,  0.5f,
-	        -0.5f,  0.5f,
-	         0.5f, -0.5f,
-	        -0.5f, -0.5f
+        const GLfloat vertices[20] = {
+          // position         // texture
+           0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+	        -0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
+	         0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
+	        -0.5f, -0.5f, 1.0f, 1.0f, 1.0f
         };
 
         const GLint indices[6] = {
