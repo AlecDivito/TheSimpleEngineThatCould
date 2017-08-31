@@ -36,6 +36,14 @@ Window::Window(int width, int height) : Width(width), Height(height)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(context);
+
+    /* Initializing GLEW */
+    glewExperimental = GL_TRUE; // (if we didn't do this, could cause issues when using the core profile)
+    if (glewInit() != GLEW_OK)
+    {
+        std::cout << "Failed to initialize GLEW" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 Window::~Window()
