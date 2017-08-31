@@ -10,11 +10,24 @@
  *
  *****************************************************************************/
 
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 class Window
 {
     public:
-       Window();
-       virtual ~Window();
+        // Variables
+        int Width;
+        int Height;
+        GLFWwindow * context;
+
+        Window(int, int);
+        virtual ~Window();
+        GLFWwindow * getWindow();
     protected:
     private:
+        static void error_callback(int, const char *);
+        static void close_window_callback(GLFWwindow *);
+        static void framebuffer_size_callback(GLFWwindow *, int, int);
 };
