@@ -52,6 +52,8 @@ int main(int argc, char const *argv[])
 	ShaderProgram program(vertex, fragment);
 	Rectangle rect;
 
+	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
+
 	glfwSetKeyCallback(window.context, key_callback);
 	glfwSetCursorPosCallback(window.context, cursor_pos_callback);
 	glfwSetCursorEnterCallback(window.context, cursor_enter_callback);
