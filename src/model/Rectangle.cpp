@@ -9,7 +9,6 @@
  *****************************************************************************/
 
 #include "model/Rectangle.h"
-#include "util/ShaderProgram.h"
 
 Rectangle::Rectangle(ShaderProgram program)
 {

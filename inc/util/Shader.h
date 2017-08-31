@@ -16,11 +16,11 @@
 class Shader
 {
     public:
+       GLuint shader;
        Shader(std::string, GLenum);
        virtual ~Shader();
     protected:
     private:
-       GLuint shader;
        const GLchar * source;
        const char * getFileSource(std::string);
 };

@@ -8,7 +8,7 @@
  *
  *****************************************************************************/
 
-#include "Shader.h"
+#include "util/Shader.h"
 #include <fstream>
 #include <iostream>
 
@@ -40,7 +40,7 @@ Shader::~Shader()
 
 const char * Shader::getFileSource(std::string path)
 {
-	ifstream file;
+	std::ifstream file;
 
 	file.open(path);
 	if (!file) {
@@ -50,7 +50,7 @@ const char * Shader::getFileSource(std::string path)
 	std::string output;
 	std::string line;
 	while (!file.eof()) {
-		cin.getline(file, line);
+		getline(file, line);
 		output.append(line + "\n");
 	}
 	file.close();

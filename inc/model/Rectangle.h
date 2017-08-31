@@ -11,6 +11,7 @@
  *****************************************************************************/
 
 #include <GL/glew.h>
+#include "util/ShaderProgram.h"
 
 class Rectangle
 {
@@ -19,13 +20,16 @@ class Rectangle
        GLuint VBO;
        GLuint VAO;
 
-       Rectangle();
+       Rectangle(ShaderProgram);
        virtual ~Rectangle();
+
+       void Bind();
+       void Draw();
     protected:
     private:
-       float vertices[] = {
-	        0.0f,  0.5f, // Vertex 1 (X, Y)
-	        0.5f, -0.5f,
-	       -0.5f, -0.5f
-       };
+        const float vertices[6] = {
+	         0.0f,  0.5f,
+	         0.5f, -0.5f,
+	        -0.5f, -0.5f
+        };
 };
