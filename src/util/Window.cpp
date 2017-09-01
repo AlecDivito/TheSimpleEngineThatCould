@@ -9,7 +9,6 @@
  *****************************************************************************/
 
 #include "util/Window.h"
-#include "event/Input.h"
 #include <iostream>
 
 Window::Window(int width, int height) : Width(width), Height(height)
@@ -46,8 +45,6 @@ Window::Window(int width, int height) : Width(width), Height(height)
         std::cout << "Failed to initialize GLEW" << std::endl;
         exit(EXIT_FAILURE);
     }
-
-    Input::createInstance(this);
 }
 
 Window::~Window()

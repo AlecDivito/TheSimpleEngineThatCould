@@ -6,9 +6,24 @@
 #include "model/Rectangle.h"
 #include "util/Texture.h"
 
+#include "event/MouseInputEvent.h"
+#include "event/CursorPositionEvent.h"
+#include "event/KeyInputEvent.h"
+#include "event/MouseScrollEvent.h"
+
+#include "controller/Camera3d.h"
+
+
 int main(int argc, char const *argv[])
 {
 	Window window(640, 480);
+
+	MouseInputEvent::CreateInstance(&window);
+	CursorPositionEvent::CreateInstance(&window);
+	KeyInputEvent::CreateInstance(&window);
+	MouseScrollEvent::CreateInstance(&window);
+
+	Camera3d camera;
 
 	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
 	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
