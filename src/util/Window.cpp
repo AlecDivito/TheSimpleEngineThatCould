@@ -9,6 +9,7 @@
  *****************************************************************************/
 
 #include "util/Window.h"
+#include "event/Input.h"
 #include <iostream>
 
 Window::Window(int width, int height) : Width(width), Height(height)
@@ -20,7 +21,8 @@ Window::Window(int width, int height) : Width(width), Height(height)
         exit(EXIT_FAILURE);
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
     context = glfwCreateWindow(Width, Height, "Hello World", nullptr, nullptr);
@@ -44,6 +46,8 @@ Window::Window(int width, int height) : Width(width), Height(height)
         std::cout << "Failed to initialize GLEW" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    Input::createInstance(this);
 }
 
 Window::~Window()
