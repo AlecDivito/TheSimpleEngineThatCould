@@ -53,8 +53,9 @@ void Texture::Generate()
     glTexImage2D(GL_TEXTURE_2D, 0, Internal_Format, Width, Height, 0, Image_Format,
         GL_UNSIGNED_BYTE, image);
 
-    glBindTexture(GL_TEXTURE_2D, Id);
     glGenerateMipmap(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     SOIL_free_image_data(image);
 }

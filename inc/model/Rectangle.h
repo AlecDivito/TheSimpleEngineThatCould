@@ -11,6 +11,8 @@
  *****************************************************************************/
 
 #include <GL/glew.h>
+#include "util/Texture.h"
+#include "util/ShaderProgram.h"
 
 class Rectangle
 {
@@ -21,12 +23,16 @@ class Rectangle
        GLuint VAO;
 
        Rectangle();
+       Rectangle(Texture*);
        virtual ~Rectangle();
 
-       void Bind();
-       void Draw();
+       void Build();
+       void Bind(ShaderProgram);
+       void Draw(ShaderProgram);
     protected:
     private:
+       Texture * Sprite;
+
         const GLfloat vertices[20] = {
           // position         // texture
            0.5f,  0.5f, 1.0f, 0.0f, 0.0f,

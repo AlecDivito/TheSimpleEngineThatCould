@@ -51,9 +51,9 @@ int main(int argc, char const *argv[])
 	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
 	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
-	Rectangle rect;
 	Texture t("/home/divitoa/Program/c++/projects/game/texture/sample.png");
 	t.Generate();
+	Rectangle rect(&t);
 
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 
@@ -72,8 +72,7 @@ int main(int argc, char const *argv[])
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		program.Use();
-		t.Bind();
-		rect.Draw();
+		rect.Draw(program);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);
 		/* Poll for and process events */
