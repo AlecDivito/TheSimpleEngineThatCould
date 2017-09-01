@@ -9,14 +9,24 @@
  *****************************************************************************/
 
 #include "controller/Camera3d.h"
+#include <iostream>
 
 Camera3d::Camera3d()
 {
-    // ctor
+    _cursor = CursorPositionEvent::GetInstance();
+    _cursor->Attach(this);
 }
 
 
 Camera3d::~Camera3d()
 {
-    // dtor
+    _cursor->Detach(this);
+}
+
+void Camera3d::Update(Event * eventTriggered)
+{
+    if (eventTriggered == _cursor)
+    {
+        std::cout << "the fuck" << std::endl;
+    }
 }

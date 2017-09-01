@@ -10,11 +10,16 @@
  *
  *****************************************************************************/
 
-class Camera3d
+#include "event/CursorPositionEvent.h"
+#include "event/Event.h"
+
+class Camera3d : public Observer
 {
     public:
        Camera3d();
        virtual ~Camera3d();
+       virtual void Update(Event *);
     protected:
     private:
+        CursorPositionEvent * _cursor;
 };
