@@ -16,14 +16,25 @@ class Texture
 {
     public:
         GLuint Id;
-        int Width;
-        int Height;
+
+        GLint Width;
+        GLint Height;
+
+        GLint Internal_Format; // Format of texture object
+        GLint Image_Format; // Format of loaded image
+
+        GLuint Wrap_S;
+        GLuint Wrap_T;
+        GLuint Filter_Min;
+        GLuint Filter_Max;
+
         const char * Path;
 
-        Texture();
+        Texture(const char *);
         virtual ~Texture();
-        void Generate(GLuint,GLuint);
+        void Generate();
         void Bind();
     protected:
     private:
+        GLint SoilRGBType();
 };

@@ -52,8 +52,8 @@ int main(int argc, char const *argv[])
 	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
 	Rectangle rect;
-	Texture t;
-	t.Generate(2, 2);
+	Texture t("/home/divitoa/Program/c++/projects/game/texture/sample.png");
+	t.Generate();
 
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 

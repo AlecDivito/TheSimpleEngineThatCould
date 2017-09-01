@@ -25,7 +25,9 @@
 #include <SOIL.h>
 
 
-Texture::Texture()
+Texture::Texture(const char * path) : Width(0), Height(0), Internal_Format(GL_RGB),
+    Image_Format(GL_RGB), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT),
+    Filter_Min(GL_NEAREST), Filter_Max(GL_NEAREST), Path(path)
 {
     glGenTextures(1, &Id);
 }
@@ -36,29 +38,24 @@ Texture::~Texture()
     glDeleteTextures(1, &Id);
 }
 
-void Texture::Generate(GLuint width,GLuint height)
+void Texture::Generate()
 {
-    Width = width;
-    height = height;
-
     glBindTexture(GL_TEXTURE_2D, Id);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // wrapping
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, Wrap_S); // wrapping
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, Wrap_T);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // filtering
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, Filter_Min); // filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, Filter_Max);
 
-    // Black/white checkerboard
-    unsigned char* image = SOIL_load_image("/home/divitoa/Program/c++/projects/game/texture/sample.png",
-     &Width, &Height, 0, /*texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA :*/ SOIL_LOAD_RGB);
+    unsigned char * image = SOIL_load_image(Path, &Width, &Height, 0, SoilRGBType());
 
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glTexImage2D(GL_TEXTURE_2D, 0, Internal_Format, Width, Height, 0, Image_Format,
+        GL_UNSIGNED_BYTE, image);
 
     glBindTexture(GL_TEXTURE_2D, Id);
-    //glGenerateMipmap(GL_TEXTURE_2D);
-    //
+    glGenerateMipmap(GL_TEXTURE_2D);
+
     SOIL_free_image_data(image);
 }
 
@@ -66,3 +63,9 @@ void Texture::Bind()
 {
     glBindTexture(GL_TEXTURE_2D, Id);
 }
+
+GLint Texture::SoilRGBType()
+{
+    return (Image_Format == GL_RGBA) ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB;
+}
+
