@@ -19,6 +19,9 @@ class CursorPositionEvent : public Event
         double XPos;
         double YPos;
 
+        double XOffset;
+        double YOffset;
+
         static void CreateInstance(Window *);
         static CursorPositionEvent * GetInstance();
         virtual ~CursorPositionEvent();
@@ -27,6 +30,11 @@ class CursorPositionEvent : public Event
         void operator=(CursorPositionEvent const&)  = delete;
     protected:
     private:
+        bool _hasMouseMovementStarted;
+
+        double LastXPos;
+        double LastYPos;
+
         CursorPositionEvent(Window *);
         static CursorPositionEvent * _instance;
 

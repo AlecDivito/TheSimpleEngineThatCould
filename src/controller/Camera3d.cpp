@@ -45,7 +45,8 @@ void Camera3d::_processKeyboard()
 
 void Camera3d::_processMouseMovement()
 {
-    std::cout << "cursor move " << _cursor->XPos << std::endl;
+    std::cout << "cursor move " << _cursor->XPos << " " << _cursor->LastXPos << " " <<
+     _cursor->XOffset << std::endl;
 }
 
 void Camera3d::_updateCameraVectors()

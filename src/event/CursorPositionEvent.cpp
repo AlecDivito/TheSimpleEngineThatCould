@@ -36,6 +36,9 @@ CursorPositionEvent * CursorPositionEvent::GetInstance()
 CursorPositionEvent::CursorPositionEvent(Window * window)
 {
     glfwSetCursorPosCallback(window->context, cursor_pos_callback);
+    LastXPos = (double)window->Width / 2.0;
+    LastYPos = window->Height / 2.0;
+    _hasMouseMovementStarted = true;
 }
 
 
@@ -48,7 +51,19 @@ void CursorPositionEvent::cursor_pos_callback(GLFWwindow * window, double xpos, 
 {
     _instance->XPos = xpos;
     _instance->YPos = ypos;
+
+    if (_instance->_hasMouseMovementStarted)
+    {
+        _instance->LastXPos = xpos;
+        _instance->LastYPos = ypos;
+        _instance->_hasMouseMovementStarted = false;
+    }
+
+    _instance->XOffset = xpos - _instance->LastXPos;
+    _instance->YOffset = _instance->LastYPos - ypos;
+
+    _instance->LastXPos = xpos;
+    _instance->LastYPos = ypos;
+
     _instance->Notify();
-    std::cout << "Mouse Pos, X: " << _instance->XPos << ", Y: " << _instance->YPos << std::endl;
-    std::cout << "Mouse Pos, X: " << xpos << ", Y: " << ypos << std::endl;
 }
