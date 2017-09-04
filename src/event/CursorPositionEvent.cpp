@@ -19,7 +19,7 @@ void CursorPositionEvent::CreateInstance(Window * window)
 {
     if (_instance == 0)
     {
-        CursorPositionEvent::_instance = new CursorPositionEvent(window);
+        _instance = new CursorPositionEvent(window);
     }
 }
 

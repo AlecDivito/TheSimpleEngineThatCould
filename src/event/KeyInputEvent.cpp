@@ -19,7 +19,7 @@ void KeyInputEvent::CreateInstance(Window * window)
 {
     if (_instance == 0)
     {
-        KeyInputEvent::_instance = new KeyInputEvent(window);
+        _instance = new KeyInputEvent(window);
     }
 }
 

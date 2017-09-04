@@ -11,6 +11,7 @@
  *****************************************************************************/
 
 #include "event/CursorPositionEvent.h"
+#include "event/KeyInputEvent.h"
 #include "event/Event.h"
 
 class Camera3d : public Observer
@@ -18,8 +19,16 @@ class Camera3d : public Observer
     public:
        Camera3d();
        virtual ~Camera3d();
-       virtual void Update(Event *);
+        // update camera
+        virtual void Update(Event *);
     protected:
     private:
+        // events
         CursorPositionEvent * _cursor;
+        KeyInputEvent * _keys;
+        // process events
+        void _processKeyboard();
+        void _processMouseMovement();
+        // Calculate front vector
+        void _updateCameraVectors();
 };
