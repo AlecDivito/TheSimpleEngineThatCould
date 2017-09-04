@@ -38,7 +38,7 @@ CursorPositionEvent::CursorPositionEvent(Window * window)
     glfwSetCursorPosCallback(window->context, cursor_pos_callback);
     LastXPos = (double)window->Width / 2.0;
     LastYPos = window->Height / 2.0;
-    _hasMouseMovementStarted = true;
+    _hasMouseMovementStarted = false;
 }
 
 
@@ -52,11 +52,11 @@ void CursorPositionEvent::cursor_pos_callback(GLFWwindow * window, double xpos, 
     _instance->XPos = xpos;
     _instance->YPos = ypos;
 
-    if (_instance->_hasMouseMovementStarted)
+    if ( ! _instance->_hasMouseMovementStarted)
     {
         _instance->LastXPos = xpos;
         _instance->LastYPos = ypos;
-        _instance->_hasMouseMovementStarted = false;
+        _instance->_hasMouseMovementStarted = true;
     }
 
     _instance->XOffset = xpos - _instance->LastXPos;

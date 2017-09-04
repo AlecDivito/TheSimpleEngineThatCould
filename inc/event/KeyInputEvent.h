@@ -16,6 +16,7 @@
 class KeyInputEvent : public Event
 {
     public:
+        bool Keys[1024];
         int Key;
         int Scancode;
         int Action;
