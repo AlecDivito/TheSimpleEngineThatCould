@@ -25,6 +25,9 @@ int main(int argc, char const *argv[])
 
 	Camera3d camera;
 
+	glm::mat4 projection = glm::perspective(
+		glm::radians(45.0f), 1.0f * window.Width/window.Height, 0.1f, 500.0f);
+
 	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
 	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
@@ -32,6 +35,9 @@ int main(int argc, char const *argv[])
 	t.Generate();
 	Rectangle rect(&t);
 
+		program.Use();
+
+	program.SetMatrix4("projection", projection);
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 
 	 // set the cursor to be hidden and in the middle of the screen
@@ -44,7 +50,11 @@ int main(int argc, char const *argv[])
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		program.Use();
+		/* Some math */
+		program.SetMatrix4("view", camera.ViewMatrix());
+		program.SetMatrix4("model", glm::mat4(1.0f));
+		/* Draw stuff */
+		// 		program.Use();
 		rect.Draw(program);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);

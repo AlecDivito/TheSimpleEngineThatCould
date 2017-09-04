@@ -23,15 +23,15 @@ class ShaderProgram
         virtual ~ShaderProgram();
         ShaderProgram & Use();
         // uniform
-        void SetFloat    (const GLchar *, GLfloat, GLboolean);
-        void SetInteger  (const GLchar *, GLint,   GLboolean);
-        void SetVector2f (const GLchar *, GLfloat, GLfloat, GLboolean);
-        void SetVector3f (const GLchar *, GLfloat, GLfloat, GLfloat, GLboolean);
-        void SetVector4f (const GLchar *, GLfloat, GLfloat, GLfloat, GLfloat, GLboolean);
-        void SetVector2f (const GLchar *, const glm::vec2 &, GLboolean);
-        void SetVector3f (const GLchar *, const glm::vec3 &, GLboolean);
-        void SetVector4f (const GLchar *, const glm::vec4 &, GLboolean);
-        void SetMatrix4  (const GLchar *, const glm::mat4 &, GLboolean);
+        void SetFloat    (const GLchar *, GLfloat, GLboolean = true);
+        void SetInteger  (const GLchar *, GLint,   GLboolean = true);
+        void SetVector2f (const GLchar *, GLfloat, GLfloat, GLboolean = true);
+        void SetVector3f (const GLchar *, GLfloat, GLfloat, GLfloat, GLboolean = true);
+        void SetVector4f (const GLchar *, GLfloat, GLfloat, GLfloat, GLfloat, GLboolean = true);
+        void SetVector2f (const GLchar *, const glm::vec2 &, GLboolean = true);
+        void SetVector3f (const GLchar *, const glm::vec3 &, GLboolean = true);
+        void SetVector4f (const GLchar *, const glm::vec4 &, GLboolean = true);
+        void SetMatrix4  (const GLchar *, const glm::mat4 &, GLboolean = true);
 
     protected:
     private:

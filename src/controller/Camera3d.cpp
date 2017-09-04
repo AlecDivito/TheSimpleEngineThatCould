@@ -86,7 +86,7 @@ void Camera3d::Update(Event * eventTriggered)
 void Camera3d::_processKeyboard()
 {
     std::cout << "key press " << _keys->Key << std::endl;
-    GLfloat velocity = MovementSpeed * 0.05;// * deltaTime;
+    GLfloat velocity = MovementSpeed * 0.5;// * deltaTime;
     if(_keys->Keys[GLFW_KEY_W])
     {
         Position += Front * velocity;
@@ -103,6 +103,7 @@ void Camera3d::_processKeyboard()
     {
         Position += Right * velocity;
     }
+    std::cout << Position.x << " "<< Position.y << " "<< Position.z << " " << std::endl;
 }
 
 void Camera3d::_processMouseMovement()
