@@ -11,20 +11,20 @@
 #include "controller/Camera3d.h"
 #include <iostream>
 
-Camera3d::Camera3d() :  Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
-               MouseSensitivity(SENSITIVTY), ConstrainPitch(true)
-{
-    _cursor = CursorPositionEvent::GetInstance();
-    _cursor->Attach(this);
-    _keys = KeyInputEvent::GetInstance();
-    _keys->Attach(this);
+// Camera3d::Camera3d() :  Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
+//                MouseSensitivity(SENSITIVTY), ConstrainPitch(true)
+// {
+//     _cursor = CursorPositionEvent::GetInstance();
+//     _cursor->Attach(this);
+//     _keys = KeyInputEvent::GetInstance();
+//     _keys->Attach(this);
 
-    Position = glm::vec3(0.0f, 0.0f, 0.0f);
-    WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-    Yaw = YAW;
-    Pitch = PITCH;
-    _updateCameraVectors();
-}
+//     Position = glm::vec3(0.0f, 0.0f, 0.0f);
+//     WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+//     Yaw = YAW;
+//     Pitch = PITCH;
+//     _updateCameraVectors();
+// }
 
 Camera3d::Camera3d(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch) :
                Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),

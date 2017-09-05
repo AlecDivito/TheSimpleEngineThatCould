@@ -20,18 +20,24 @@ Install OpenGL, GLM, GLEW, freeGlut, and cmake
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install build-essential
 # grab all of the needed packages (you may not need all of them, but this worked for me)
-sudo apt install libgl1-mesa-dev mesa-common-dev freeglut3 freeglut3-dev libglew-dev libglew2.0 libglm-dev libsoil-dev cmake
+sudo apt install libgl1-mesa-dev mesa-common-dev freeglut3 freeglut3-dev libglew-dev libglew2.0 xorg-dev libglu1-mesa-dev libglm-dev libsoil-dev cmake
 ```
-You will also need to install GLFW from there website. They provide very helpful  documentation on there website at http://www.glfw.org. You will need to install GLFW into the lib directoy in the project. After download glfw, move it to the lib direcotry in this projects directory and use the following commands:
+You will also need to install GLFW from there website. They provide very helpful  documentation on there website at http://www.glfw.org. You will need to install GLFW into the lib directoy in the project and include libglfw#.a in your /usr/lib folder. After download glfw, move it to the lib direcotry in this projects directory and use the following commands:
 ```
 cd <glfw-root-dir>
 cmake .
+cd src
+make
 ```
+
+NOTE: There could be a problem where the glfw root name doesn't link up with the one in the makefile.
 
 At this point you should be able to go into the root project directory and make the project with:
 ```
 make
 ```
+
+NOTE: For right now, I am using ABSLOUTE locations for files like shaders and textures, so you may need to go into the main file before you build it.
 
 ## Tests
 
