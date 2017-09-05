@@ -33,3 +33,6 @@
 
 # Lib
 bin/
+
+# vscode
+.vscode/
