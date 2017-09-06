@@ -13,7 +13,6 @@
 
 #include "controller/Camera3d.h"
 
-
 int main(int argc, char const *argv[])
 {
 	Window window(640, 480);
@@ -35,13 +34,11 @@ int main(int argc, char const *argv[])
 	t.Generate();
 	Rectangle rect(&t);
 
-		program.Use();
+	program.Use();
 
 	program.SetMatrix4("projection", projection);
+	program.SetMatrix4("model", glm::mat4());
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
-
-	 // set the cursor to be hidden and in the middle of the screen
-	//glfwSetInputMode(window.context, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	/* Loop until the user closes the window */
 	double init_time = glfwGetTime(); // get time of startup
@@ -49,10 +46,9 @@ int main(int argc, char const *argv[])
 	{
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		/* Some math */
 		program.SetMatrix4("view", camera.ViewMatrix());
-		program.SetMatrix4("model", glm::mat4(1.0f));
 		/* Draw stuff */
 		// 		program.Use();
 		rect.Draw(program);
