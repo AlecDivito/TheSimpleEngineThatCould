@@ -38,6 +38,8 @@ Window::Window(int width, int height) : Width(width), Height(height)
     /* Make the window's context current */
     glfwMakeContextCurrent(context);
 
+	glfwSetInputMode(context, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     /* Initializing GLEW */
     glewExperimental = GL_TRUE; // (if we didn't do this, could cause issues when using the core profile)
     if (glewInit() != GLEW_OK)
@@ -45,6 +47,13 @@ Window::Window(int width, int height) : Width(width), Height(height)
         std::cout << "Failed to initialize GLEW" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    int w, h;
+    glfwGetFramebufferSize(context, &w, &h);
+    // set the view port
+    glViewport(0, 0, w, h);
+    // enable depth testing    
+    glEnable(GL_DEPTH_TEST);
 }
 
 Window::~Window()

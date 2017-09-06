@@ -22,7 +22,7 @@
  *****************************************************************************/
 
 #include "util/Texture.h"
-#include <SOIL.h>
+#include "SOIL/SOIL.h"
 
 
 Texture::Texture(const char * path) : Width(0), Height(0), Internal_Format(GL_RGB),
