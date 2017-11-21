@@ -10,11 +10,55 @@
  *
  *****************************************************************************/
 
+#include <GL/glew.h>
+#include "util/Texture.h"
+#include "util/ShaderProgram.h"
+
 class Cube
 {
     public:
-       Cube();
-       virtual ~Cube();
+        // variables
+        GLuint EBO;
+        GLuint VBO;
+        GLuint VAO;
+
+        Cube(Texture * = nullptr);
+        virtual ~Cube();
+
+        void Build();
+        void Bind(ShaderProgram);
+        void Draw(ShaderProgram);
     protected:
     private:
+        Texture * _sprite;
+
+        const GLfloat _vertices[40] = 
+        {
+            // position        // Texture
+             0.5f,  0.5f, 0.5f, 0.0f, 0.0f,            
+            -0.5f,  0.5f, 0.5f, 1.0f, 0.0f,
+             0.5f, -0.5f, 0.5f, 0.0f, 1.0f,
+            -0.5f, -0.5f, 0.5f, 1.0f, 1.0f,
+
+             0.5f,  0.5f, -0.5f, 0.0f, 0.0f,            
+            -0.5f,  0.5f, -0.5f, -1.0f, 0.0f,
+             0.5f, -0.5f, -0.5f, 0.0f, -1.0f,
+            -0.5f, -0.5f, -0.5f, -1.0f, -1.0f,
+        };
+
+        const GLint _indices[36] = 
+        {
+            // rect front
+            0,1,2, 1,2,3,
+            // right side
+            0,2,4, 2,4,6,
+            // left side
+            3,2,7, 2,7,1,
+            // top
+            0,1,4, 1,4,5,
+            // bottom
+            2,3,6, 3,6,7,
+            // back
+            4,5,6, 5,6,7
+        };
 };

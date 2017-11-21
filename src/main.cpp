@@ -3,8 +3,10 @@
 #include "util/Window.h"
 #include "util/Shader.h"
 #include "util/ShaderProgram.h"
-#include "model/Rectangle.h"
 #include "util/Texture.h"
+
+#include "model/Rectangle.h"
+#include "model/Cube.h"
 
 #include "event/MouseInputEvent.h"
 #include "event/CursorPositionEvent.h"
@@ -33,6 +35,7 @@ int main(int argc, char const *argv[])
 	Texture t("/home/divitoa/Documents/cpp/TheSimpleEngineThatCould/texture/sample.png");
 	t.Generate();
 	Rectangle rect(&t);
+	Cube c(&t);
 
 	program.Use();
 
@@ -52,6 +55,7 @@ int main(int argc, char const *argv[])
 		/* Draw stuff */
 		// 		program.Use();
 		rect.Draw(program);
+		c.Draw(program);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);
 		/* Poll for and process events */
