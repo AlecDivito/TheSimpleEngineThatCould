@@ -4,6 +4,7 @@
 #include "util/Shader.h"
 #include "util/ShaderProgram.h"
 #include "util/Texture.h"
+#include "util/TimeManager.h"
 
 #include "model/Rectangle.h"
 #include "model/Cube.h"
@@ -36,6 +37,7 @@ int main(int argc, char const *argv[])
 	t.Generate();
 	Rectangle rect(&t);
 	Cube c(&t);
+	TimeManager time;
 
 	program.Use();
 
@@ -44,9 +46,10 @@ int main(int argc, char const *argv[])
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 
 	/* Loop until the user closes the window */
-	double init_time = glfwGetTime(); // get time of startup
 	while (!glfwWindowShouldClose(window.context))
 	{
+		time.updateDeltaTime();
+		camera.ProcessKeyboard();
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
