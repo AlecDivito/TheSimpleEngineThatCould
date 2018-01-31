@@ -22,9 +22,7 @@ class VertexArray
 
         virtual ~VertexArray();
 
-        void Draw(std::shared_ptr<Buffer> i);
-
-        GLuint id() { return _id;}
+        void Draw();
 
       protected:
       private:

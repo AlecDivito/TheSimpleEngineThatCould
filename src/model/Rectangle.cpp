@@ -49,5 +49,5 @@ void Rectangle::Draw(ShaderProgram program)
         program.SetInteger("isSpriteNull", 1, true);
     }
 
-    VAOObj->Draw(EBOObj);
+    VAOObj->Draw();
 }

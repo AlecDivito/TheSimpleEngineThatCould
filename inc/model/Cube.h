@@ -14,15 +14,12 @@
 #include <memory>
 #include "util/Texture.h"
 #include "util/ShaderProgram.h"
+#include "framework/Buffer.h"
+#include "framework/VertexArray.h"
 
 class Cube
 {
     public:
-        // variables
-        GLuint EBO;
-        GLuint VBO;
-        GLuint VAO;
-
         Cube(std::shared_ptr<Texture> texture = nullptr);
         virtual ~Cube();
 
@@ -31,6 +28,9 @@ class Cube
         void Draw(ShaderProgram);
     protected:
     private:
+        std::shared_ptr<Buffer> EBO;
+        std::shared_ptr<Buffer> VBO;
+        std::shared_ptr<VertexArray> VAO;
         std::shared_ptr<Texture> _sprite;
 
         const GLfloat _vertices[40] = 

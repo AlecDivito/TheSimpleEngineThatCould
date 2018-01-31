@@ -34,9 +34,9 @@ VertexArray::~VertexArray()
     glDeleteVertexArrays(1, &_id);
 }
 
-void VertexArray::Draw(std::shared_ptr<Buffer> i)
+void VertexArray::Draw()
 {
     glBindVertexArray(_id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i->getId());
-    glDrawElements(GL_TRIANGLES, i->getDataSize(), GL_UNSIGNED_INT, NULL);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indices->getId());
+    glDrawElements(GL_TRIANGLES, _buffer->getDataSize(), GL_UNSIGNED_INT, NULL);
 }
