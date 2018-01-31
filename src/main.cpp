@@ -1,10 +1,14 @@
 #include <GL/glew.h>
+#include <memory>
 
 #include "util/Window.h"
 #include "util/Shader.h"
 #include "util/ShaderProgram.h"
-#include "model/Rectangle.h"
 #include "util/Texture.h"
+#include "util/TimeManager.h"
+
+#include "model/Rectangle.h"
+#include "model/Cube.h"
 
 #include "event/MouseInputEvent.h"
 #include "event/CursorPositionEvent.h"
@@ -27,12 +31,16 @@ int main(int argc, char const *argv[])
 	glm::mat4 projection = glm::perspective(
 		glm::radians(45.0f), 1.0f * window.Width/window.Height, 0.1f, 500.0f);
 
-	Shader vertex("/home/divitoa/Documents/cpp/TheSimpleEngineThatCould/shader/basic.vs", GL_VERTEX_SHADER);
-	Shader fragment("/home/divitoa/Documents/cpp/TheSimpleEngineThatCould/shader/basic.fs", GL_FRAGMENT_SHADER);
+	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
+	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
-	Texture t("/home/divitoa/Documents/cpp/TheSimpleEngineThatCould/texture/sample.png");
-	t.Generate();
-	Rectangle rect(&t);
+	
+	auto t = std::make_shared<Texture>("/home/divitoa/Program/c++/projects/game/texture/sample.png");
+	t->Generate();
+	Rectangle rect(t);
+	Cube c(t);
+	
+	TimeManager time;
 
 	program.Use();
 
@@ -41,9 +49,10 @@ int main(int argc, char const *argv[])
 	program.SetVector3f("uniColor", glm::vec3(1.0f, 0.0f, 0.0f), true);
 
 	/* Loop until the user closes the window */
-	double init_time = glfwGetTime(); // get time of startup
 	while (!glfwWindowShouldClose(window.context))
 	{
+		time.updateDeltaTime();
+		camera.ProcessKeyboard();
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,6 +61,7 @@ int main(int argc, char const *argv[])
 		/* Draw stuff */
 		// 		program.Use();
 		rect.Draw(program);
+		c.Draw(program);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window.context);
 		/* Poll for and process events */

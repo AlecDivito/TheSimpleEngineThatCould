@@ -26,7 +26,7 @@ class KeyInputEvent : public Event
         static KeyInputEvent * GetInstance();
         virtual ~KeyInputEvent();
 
-        KeyInputEvent(KeyInputEvent const&)        = delete;
+        KeyInputEvent(KeyInputEvent const&)   = delete;
         void operator=(KeyInputEvent const&)  = delete;
     protected:
     private:

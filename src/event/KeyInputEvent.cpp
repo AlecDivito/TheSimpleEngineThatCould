@@ -20,6 +20,10 @@ void KeyInputEvent::CreateInstance(Window * window)
     if (_instance == 0)
     {
         _instance = new KeyInputEvent(window);
+        for (int i = 0; i < 1024; i++)
+        {
+            _instance->Keys[i] = false;
+        }
     }
 }
 

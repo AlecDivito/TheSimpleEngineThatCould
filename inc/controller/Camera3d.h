@@ -54,13 +54,13 @@ class Camera3d : public Observer
         glm::mat4 ViewMatrix();
         // update camera
         virtual void Update(Event *);
+        void ProcessKeyboard();
     protected:
     private:
         // events
         CursorPositionEvent * _cursor;
         KeyInputEvent * _keys;
         // process events
-        void _processKeyboard();
         void _processMouseMovement();
         // Calculate front vector
         void _updateCameraVectors();

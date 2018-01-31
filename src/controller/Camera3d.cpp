@@ -9,6 +9,7 @@
  *****************************************************************************/
 
 #include "controller/Camera3d.h"
+#include "util/TimeManager.h"
 #include <iostream>
 
 // Camera3d::Camera3d() :  Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
@@ -77,16 +78,11 @@ void Camera3d::Update(Event * eventTriggered)
     {
         _processMouseMovement();
     }
-    if (eventTriggered == _keys)
-    {
-        _processKeyboard();
-    }
 }
 
-void Camera3d::_processKeyboard()
+void Camera3d::ProcessKeyboard()
 {
-    std::cout << "key press " << _keys->Key << std::endl;
-    GLfloat velocity = MovementSpeed * 0.5;// * deltaTime;
+    GLfloat velocity = MovementSpeed * 1.5f * TimeManager::DeltaTime;
     if(_keys->Keys[GLFW_KEY_W])
     {
         Position += Front * velocity;
@@ -103,7 +99,7 @@ void Camera3d::_processKeyboard()
     {
         Position += Right * velocity;
     }
-    std::cout << Position.x << " "<< Position.y << " "<< Position.z << " " << std::endl;
+    // std::cout << Position.x << " "<< Position.y << " "<< Position.z << " " << std::endl;
 }
 
 void Camera3d::_processMouseMovement()
