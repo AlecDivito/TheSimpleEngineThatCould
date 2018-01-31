@@ -11,31 +11,34 @@
  *****************************************************************************/
 
 #include <GL/glew.h>
+#include <memory>
+
+#include "framework/Buffer.h"
+#include "framework/VertexArray.h"
 #include "util/Texture.h"
 #include "util/ShaderProgram.h"
 
 class Rectangle
 {
     public:
-       // variables
-       GLuint EBO;
-       GLuint VBO;
-       GLuint VAO;
+        // variables
+        std::shared_ptr<Buffer> EBOObj;
+        std::shared_ptr<Buffer> VBOObj;
+        std::shared_ptr<VertexArray> VAOObj;
 
-       Rectangle();
-       Rectangle(Texture*);
-       virtual ~Rectangle();
+        Rectangle();
+        Rectangle(std::shared_ptr<Texture> texture);
+        virtual ~Rectangle();
 
-       void Build();
-       void Bind(ShaderProgram);
-       void Draw(ShaderProgram);
+        void Build();
+        void Draw(ShaderProgram);
     protected:
     private:
-       Texture * Sprite;
+        std::shared_ptr<Texture> Sprite;
 
         const GLfloat vertices[20] = {
-          // position         // texture
-           0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+            // position         // texture
+             0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
 	        -0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
 	         0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
 	        -0.5f, -0.5f, 1.0f, 1.0f, 1.0f
