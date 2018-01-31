@@ -10,7 +10,7 @@
 
 #include "model/Cube.h"
 
-Cube::Cube(Texture * texture) : _sprite(texture)
+Cube::Cube(std::shared_ptr<Texture> texture) : _sprite(texture)
 {
     Build();
 }

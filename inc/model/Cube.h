@@ -11,6 +11,7 @@
  *****************************************************************************/
 
 #include <GL/glew.h>
+#include <memory>
 #include "util/Texture.h"
 #include "util/ShaderProgram.h"
 
@@ -22,7 +23,7 @@ class Cube
         GLuint VBO;
         GLuint VAO;
 
-        Cube(Texture * = nullptr);
+        Cube(std::shared_ptr<Texture> texture = nullptr);
         virtual ~Cube();
 
         void Build();
@@ -30,7 +31,7 @@ class Cube
         void Draw(ShaderProgram);
     protected:
     private:
-        Texture * _sprite;
+        std::shared_ptr<Texture> _sprite;
 
         const GLfloat _vertices[40] = 
         {

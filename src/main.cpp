@@ -1,4 +1,5 @@
 #include <GL/glew.h>
+#include <memory>
 
 #include "util/Window.h"
 #include "util/Shader.h"
@@ -30,13 +31,15 @@ int main(int argc, char const *argv[])
 	glm::mat4 projection = glm::perspective(
 		glm::radians(45.0f), 1.0f * window.Width/window.Height, 0.1f, 500.0f);
 
-	Shader vertex("/home/divitoa/Documents/c++/TheSimpleEngineThatCould/shader/basic.vs", GL_VERTEX_SHADER);
-	Shader fragment("/home/divitoa/Documents/c++/TheSimpleEngineThatCould/shader/basic.fs", GL_FRAGMENT_SHADER);
+	Shader vertex("/home/divitoa/Program/c++/projects/game/shader/basic.vs", GL_VERTEX_SHADER);
+	Shader fragment("/home/divitoa/Program/c++/projects/game/shader/basic.fs", GL_FRAGMENT_SHADER);
 	ShaderProgram program(vertex, fragment);
-	Texture t("/home/divitoa/Documents/c++/TheSimpleEngineThatCould/texture/sample.png");
-	t.Generate();
-	Rectangle rect(&t);
-	Cube c(&t);
+	
+	auto t = std::make_shared<Texture>("/home/divitoa/Program/c++/projects/game/texture/sample.png");
+	t->Generate();
+	Rectangle rect(t);
+	Cube c(t);
+	
 	TimeManager time;
 
 	program.Use();
